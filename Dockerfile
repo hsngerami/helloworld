@@ -36,8 +36,8 @@ RUN mkdir -p /root/.m2 && \
 
 # Copy the application files, compile and package into a fat jar
 COPY . .
-RUN mvn package && \
-    mv /app/target/*.jar /app.jar && \
+RUN mvn package
+RUN mv /app/target/*.jar /app.jar && \
     rm -rf /app
 
 # Set Java's memory limit to be around half of the pod's memory via JVM_OPTS.
