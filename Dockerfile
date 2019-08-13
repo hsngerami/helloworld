@@ -31,7 +31,7 @@ RUN mkdir -p /var/maven/.m2 && \
 COPY . .
 RUN /opt/apache-maven-3.6.1/bin/mvn package
 RUN echo $(ls -1 /app/target)
-RUN mv target/*.jar app.jar
+RUN mv target/jb-hello-world-maven-0.1.0.jar app.jar
 
 # Set Java's memory limit to be around half of the pod's memory via JVM_OPTS.
 #
