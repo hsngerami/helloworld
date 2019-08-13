@@ -38,11 +38,11 @@ RUN mkdir -p /root/.m2 && \
 COPY . .
 RUN mvn package
 RUN echo $(ls -1 /app/target)
-RUN mv /app/target/*.jar /app.jar
+RUN mv target/*.jar app.jar
 
 # Set Java's memory limit to be around half of the pod's memory via JVM_OPTS.
 #
 # e.g. `JVM_OPTS="-Xms512m -Xmx512m"` when Pod has 1Gi memory.
-CMD java $JVM_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+CMD java $JVM_OPTS -Djava.security.egd=file:/dev/./urandom -jar app.jar
 
 
