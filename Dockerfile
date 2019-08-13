@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-8-alpine
+FROM confluentinc/cp-base:5.2.2
 
 ENV TZ=Asia/Tehran
 
@@ -23,8 +23,9 @@ WORKDIR /app
 # application files yet as they prevent `mvn dependency:resolve` from being cached by
 # Docker's layer caching mechanism.
 COPY pom.xml .
-RUN mvn dependency:resolve && \
-    mvn verify
+ENV MAVEN_CONFIG=/var/maven/.m2
+RUN /opt/apache-maven-3.6.1/bin/mvn dependency:resolve && \
+    /opt/apache-maven-3.6.1/bin/mvn verify
 
 # Setup permissions for directories and files that will be written to at runtime.
 # These need to be group-writeable for the default Docker image's user.
