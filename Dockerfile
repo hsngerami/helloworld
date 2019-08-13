@@ -2,20 +2,12 @@ FROM confluentinc/cp-base:5.2.2
 
 ENV TZ=Asia/Tehran
 
-RUN apk add --update --nocache \
-        tzdata \
-        bash \
-        ca-certificates \
-        rsync \
-    && \
+#RUN cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
+#    echo "${TZ}" > /etc/timezone && \
+RUN wget http://mirrors.supportex.net/apache/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz -O /opt/apache-maven-3.6.1-bin.tar.gz && \
+    tar xzvf /opt/apache-maven-3.6.1-bin.tar.gz -C /opt && \
+    export PATH=/opt/apache-maven-3.6.1/bin:$PATH
 
-    cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
-    echo "${TZ}" > /etc/timezone && \
-
-
-    rm -rf /var/cache/apk/*
-
-EXPOSE 8080
 
 WORKDIR /app
 
