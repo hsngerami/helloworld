@@ -30,9 +30,9 @@ RUN mvn dependency:resolve && \
 # These need to be group-writeable for the default Docker image's user.
 # To do this, the folders are created, their group is set to the root
 # group, and the correct group permissions are added.
-RUN mkdir -p /root/.m2 && \
-    chmod -R g+rws,a+rx /root/.m2 && \
-    chown -R 1001:0 /root/.m2
+RUN mkdir -p /var/maven/.m2 && \
+    chmod -R g+rws,a+rx /var/maven/.m2 && \
+    chown -R 1001:0 /var/maven/.m2
 
 # Copy the application files, compile and package into a fat jar
 COPY . .
