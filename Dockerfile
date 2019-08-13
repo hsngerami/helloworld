@@ -29,7 +29,7 @@ RUN mkdir -p /var/maven/.m2 && \
 
 # Copy the application files, compile and package into a fat jar
 COPY . .
-RUN mvn package
+RUN /opt/apache-maven-3.6.1/bin/mvn package
 RUN echo $(ls -1 /app/target)
 #RUN mv target/*.jar app.jar
 
